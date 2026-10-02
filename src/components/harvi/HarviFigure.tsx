@@ -45,7 +45,6 @@ function Layer({
     <picture>
       <source srcSet={asset(`/harvi/${name}.avif`)} type="image/avif" />
       <source srcSet={asset(`/harvi/${name}.webp`)} type="image/webp" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={asset(`/harvi/${name}.png`)}
         alt={alt}

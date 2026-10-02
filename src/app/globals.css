@@ -9,6 +9,8 @@
   --color-rule: #d8d8d2;
   --color-label: #6d6d68;
   --color-live: #39ff3e;
+  /* панель для чередования секций — тот же лист бумаги, чуть глубже */
+  --color-panel: #eeeee9;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
@@ -110,6 +112,15 @@ body {
     transform: scale(3.2);
     opacity: 0;
   }
+}
+
+/* ——— секции: общий ритм ——— */
+.section {
+  padding-block: clamp(5rem, 9vw, 9rem);
+}
+
+.section-head {
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
 }
 
 /* ——— спокойное появление контента (ТЗ §38) ——— */
