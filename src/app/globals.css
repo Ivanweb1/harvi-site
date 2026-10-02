@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+/* ——— Цветовая система (ТЗ §8): 90–95% нейтраль, 5–10% зелёный ——— */
+@theme {
+  --color-paper: #f5f5f2;
+  --color-ink: #171717;
+  --color-graphite: #292929;
+  --color-muted: #8b8b87;
+  --color-rule: #d8d8d2;
+  --color-label: #6d6d68;
+  --color-live: #39ff3e;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* ——— Технические подписи (ТЗ §9) ——— */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-label);
+}
+
+/* ——— HARVI: слои персонажа ——— */
+.harvi-parallax {
+  transform: translate3d(var(--harvi-figure-x, 0px), 0, 0);
+  will-change: transform;
+}
+
+.harvi-body {
+  animation: harvi-breath 9s ease-in-out infinite;
+}
+
+.harvi-head {
+  transform-origin: 50% 94%;
+  transform: translate3d(var(--harvi-head-x, 0px), var(--harvi-head-y, 0px), 0)
+    rotate(var(--harvi-head-rotate, 0deg));
+  will-change: transform;
+}
+
+.harvi-head-state {
+  transition: opacity 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.harvi-figure {
+  opacity: 0.94;
+  filter: saturate(0.85);
+  transition:
+    opacity 900ms ease,
+    filter 900ms ease;
+}
+
+.harvi-figure[data-phase="live"],
+.harvi-figure[data-phase="thinking"] {
+  opacity: 1;
+  filter: none;
+}
+
+@keyframes harvi-breath {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -3px;
+  }
+}
+
+/* ——— ● LIVE ——— */
+.harvi-pulse {
+  animation: harvi-pulse 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@keyframes harvi-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* ——— спокойное появление контента (ТЗ §38) ——— */
+.rise {
+  opacity: 0;
+  translate: 0 14px;
+  animation: harvi-rise 900ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes harvi-rise {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ——— индикатор чтения сайта (ТЗ §50) ——— */
+.reading-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 38%;
+  background: var(--color-ink);
+  animation: harvi-reading 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes harvi-reading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+/* ——— ТЗ §39: motion accessibility ——— */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .harvi-body,
+  .harvi-pulse,
+  .reading-bar::after {
+    animation: none;
+  }
+
+  .harvi-parallax,
+  .harvi-head {
+    transform: none;
+  }
+
+  .harvi-head-state {
+    transition: none;
+  }
+
+  .harvi-figure {
+    opacity: 1;
+    filter: none;
+    transition: none;
+  }
+
+  .rise {
+    opacity: 1;
+    translate: none;
+    animation: none;
+  }
+
+  .reading-bar::after {
+    width: 100%;
+    opacity: 0.35;
+  }
+}

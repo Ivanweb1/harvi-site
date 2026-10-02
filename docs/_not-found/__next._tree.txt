@@ -1,0 +1,5 @@
+:HL["/harvi-site/_next/static/chunks/2mn23ixijqms3.css","style"]
+:HL["/harvi-site/harvi/figure-base.avif","image",{"type":"image/avif","fetchPriority":"high"}]
+:HL["/harvi-site/harvi/head-sleeping.avif","image",{"type":"image/avif"}]
+:HL["/harvi-site/harvi/head-live.avif","image",{"type":"image/avif"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"MHFgfkTiUPFAQDWGz-FnZ"}

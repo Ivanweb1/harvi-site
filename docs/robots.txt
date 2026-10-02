@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://ivanweb1.github.io/harvi-site/sitemap.xml

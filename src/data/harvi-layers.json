@@ -1,0 +1,22 @@
+{
+  "canvas": {
+    "width": 1024,
+    "height": 1536
+  },
+  "head": {
+    "left": 316,
+    "top": 0,
+    "width": 368,
+    "height": 384
+  },
+  "seam": {
+    "top": 330,
+    "bottom": 375
+  },
+  "states": [
+    "sleeping",
+    "live",
+    "url",
+    "focused"
+  ]
+}
