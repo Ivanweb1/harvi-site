@@ -18,8 +18,9 @@ type FormState = "idle" | "reading" | "done";
 /**
  * SECTION 01 — Hero / Website Awakening (ТЗ §12–§15).
  *
- * Композиция: огромный тезис слева, HARVI как объект справа, между ними —
- * только то, что реально работает: статус смены и бейдж сотрудника.
+ * Композиция: тезис и найм занимают весь экран, HARVI стоит небольшой фигурой
+ * в правом нижнем углу — присутствует в кадре, но не забирает полосу контента.
+ * При нём только рабочие объекты: статус смены, реплика и бейдж сотрудника.
  */
 export function Hero() {
   const { stageRef, phase, setPhase, say, line, setTargetActive, reducedMotion } =
@@ -116,9 +117,9 @@ export function Hero() {
       ref={stageRef as React.RefObject<HTMLElement>}
       className="relative flex min-h-[100svh] flex-col pt-[72px]"
     >
-      <div className="mx-auto grid w-full max-w-[1600px] flex-1 grid-cols-1 items-end gap-x-8 px-6 sm:px-10 lg:grid-cols-12">
+      <div className="relative mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-center px-6 pt-10 pb-[168px] sm:px-10 sm:pt-12 sm:pb-[200px] lg:pb-16">
         {/* ——— типографика и найм ——— */}
-        <div className="flex flex-col justify-center self-center py-12 lg:col-span-7 lg:py-10">
+        <div className="flex flex-col">
           <div
             className="rise flex items-center gap-4"
             style={{ animationDelay: "80ms" }}
@@ -129,7 +130,7 @@ export function Hero() {
           </div>
 
           <h1
-            className="rise mt-7 text-[clamp(2.7rem,5.6vw,5.5rem)] leading-[0.92] font-medium tracking-[-0.04em]"
+            className="rise mt-6 text-[clamp(2.4rem,6.6vw,6.5rem)] leading-[0.92] font-medium tracking-[-0.04em] sm:mt-7"
             style={{ animationDelay: "160ms" }}
           >
             {hero.titleLines.map((text) => (
@@ -143,7 +144,7 @@ export function Hero() {
           </h1>
 
           <p
-            className="rise mt-8 max-w-[48ch] text-[clamp(1rem,1.15vw,1.125rem)] leading-[1.55] text-graphite"
+            className="rise mt-6 max-w-[52ch] text-[clamp(1rem,1.25vw,1.2rem)] leading-[1.55] text-graphite sm:mt-8"
             style={{ animationDelay: "260ms" }}
           >
             {hero.description}
@@ -151,7 +152,7 @@ export function Hero() {
 
           <form
             onSubmit={onSubmit}
-            className="rise mt-9 max-w-[580px]"
+            className="rise mt-7 max-w-[580px] sm:mt-9"
             style={{ animationDelay: "340ms" }}
             noValidate
           >
@@ -224,33 +225,30 @@ export function Hero() {
           </form>
 
           {/* реплика HARVI на мобильных — рядом с тем, на что он реагирует */}
-          <HarviLine line={line} className="mt-6 lg:hidden" />
+          <HarviLine line={line} className="mt-6 sm:hidden" />
         </div>
 
-        {/* ——— HARVI как объект ——— */}
-        <div className="relative self-end lg:col-span-5 lg:h-full lg:border-l lg:border-rule">
-          <div className="relative flex h-full w-full items-end justify-center lg:justify-end">
-            <div className="relative w-[min(80vw,360px)] lg:w-auto">
-              <HarviFigure className="w-full lg:h-[min(76vh,820px)] lg:w-auto" />
-
-              <StatusChip
-                variant={phase === "offline" ? "offline" : "onShift"}
-                className="absolute top-[8%] left-[64%]"
-              />
-
-              <HarviLine
-                line={line}
-                className="absolute top-[19%] right-[66%] hidden w-[15rem] text-right lg:block"
-              />
-            </div>
+        {/* ——— HARVI как объект: угол сцены, не колонка ——— */}
+        <div className="pointer-events-none absolute right-6 bottom-0 flex items-end gap-6 sm:right-10">
+          {/* реплика и бейдж сотрудника — рабочий UI рядом с ним (ТЗ §6.1) */}
+          <div className="mb-6 hidden flex-col items-end gap-4 text-right sm:flex">
+            <HarviLine line={line} className="w-[14rem]" />
+            <p className="mono-label leading-[1.9]">
+              {brand.role}
+              <br />
+              {brand.employeeId}
+            </p>
           </div>
 
-          {/* бейдж сотрудника — рабочий UI-объект, а не декор (ТЗ §6.1) */}
-          <p className="mono-label absolute bottom-8 left-8 hidden leading-[1.9] lg:block">
-            {brand.role}
-            <br />
-            {brand.employeeId}
-          </p>
+          <div className="relative w-[clamp(92px,12vw,180px)]">
+            <HarviFigure className="w-full" />
+
+            <StatusChip
+              size="sm"
+              variant={phase === "offline" ? "offline" : "onShift"}
+              className="absolute top-[6%] right-[calc(100%+0.75rem)] whitespace-nowrap"
+            />
+          </div>
         </div>
       </div>
 
